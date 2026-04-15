@@ -32,4 +32,4 @@ Este projeto está alinhado com as seguintes metas da ONU:
     ```
 
 ## 👨‍💻 Autor
-* **Seu Nome** - Aluno de Análise e Desenvolvimento de Sistemas.
+* **Felipe Fernandes Galdino** - Aluno de Análise e Desenvolvimento de Sistemas.
