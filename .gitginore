@@ -1,0 +1,12 @@
+# Bibliotecas e dependências (muito pesado para o Git)
+node_modules/
+dist/
+
+# Arquivos de ambiente e chaves (Segurança)
+.env
+.env.local
+
+# Arquivos do Sistema Operacional e do VS Code
+.vscode/
+.DS_Store
+Thumbs.db

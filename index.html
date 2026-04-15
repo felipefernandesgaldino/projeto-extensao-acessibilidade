@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voz Amiga - Acessibilidade</title>
+</head>
+<body>
+
+    <link rel="stylesheet" href="./src/style.css">
+    <script type="module" src="./src/main.ts"></script>
+
+    <h1>Voz Amiga</h1>
+    <p>Toque no botão para falar:</p>
+
+    <div class="grid">
+    <button class="fome" id="btn-fome"><span class="icon">🍎</span> FOME</button>
+    <button class="sede" id="btn-sede"><span class="icon">💧</span> SEDE</button>
+    <button class="banheiro" id="btn-banheiro"><span class="icon">🚾</span> BANHEIRO</button>
+    <button class="dor" id="btn-dor"><span class="icon">💊</span> DOR</button>
+    <button class="ajuda" id="btn-ajuda"><span class="icon">🙋</span> AJUDA</button>
+    <button class="emergencia" id="btn-emergencia"><span class="icon">🚨</span> EMERGÊNCIA</button>
+    </div>
+
+<script type="module" src="/src/main.ts"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // 1. CONFIGURAÇÃO (Coloque suas chaves aqui)
+    const SUPABASE_URL = 'https://kipqgunwiomwnruujieh.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpcHFndW53aW9td25ydXVqaWVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwNTQzMDAsImV4cCI6MjA4OTYzMDMwMH0.0AF-59nDLNok3_H-FK1F9PwwFeWt6ZBZKeM_5VKJyk8';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // 2. FUNÇÃO DE VOZ E REGISTRO NO BANCO
+    async function falar(texto, acao) {
+        // Faz o celular falar
+        const mensagem = new SpeechSynthesisUtterance(texto);
+        mensagem.lang = 'pt-BR';
+        window.speechSynthesis.speak(mensagem);
+        
+        // Salva o alerta no banco de dados em tempo real
+        const { data, error } = await supabase
+            .from('alertas_acessibilidade')
+            .insert([{ tipo_alerta: acao }]);
+
+        if (error) {
+            console.error("Erro ao enviar alerta:", error);
+        } else {
+            console.log("Alerta enviado com sucesso para o cuidador!");
+        }
+    }
+</script>
+</body>
+</html>
